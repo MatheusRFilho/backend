@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  mongo:
+    container_name: ${CONTAINER_NAME:-mongo}
+    image: mongo
+    restart: always
+    networks:
+      - network-e-burguer-node
+    ports:
+      - '27017:27017'
+
+  api_node:
+    container_name: ${CONTAINER_NAME:-api_node}
+    image: ${IMAGE_NAME:-api_node}
+    restart: always
+    networks:
+      - network-e-burguer-node
+    ports:
+      - '3333:3333'
+    build:
+      context: ./
+
+networks:
+  network-e-burguer-node:
+    name: network-e-burguer-node
+    driver: bridge
