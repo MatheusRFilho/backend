@@ -98,6 +98,14 @@ class UserControllers {
       return response.status(401).json({ message: 'Email not registered' });
     }
   }
+
+  async getHamburguerias(request: Request, response: Response) {
+    let data: Array<Object> = [];
+
+    data = await User.find({ isAdmin: true });
+
+    response.status(200).json(data);
+  }
 }
 
 export { UserControllers };
